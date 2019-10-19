@@ -28,7 +28,7 @@ struct Class
 	vector<Student> Data;
 };
 
-void start();
+void Start();
 void SelectClass(string);
 void AddClass(string);
 void RemoveClass(string);
