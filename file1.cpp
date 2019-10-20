@@ -29,7 +29,7 @@ struct Class
 	vector <Student> Data;
 };
 
-vector<Class> Database;
+vector <Class> Database;
 string currentclass ;
 
 void Start()
@@ -65,9 +65,9 @@ void SelectClass(string newclass)
 //*********************************************************
 void AddClass(string filename)
 {
-	ifstream classfile ("filename",ios::in)
-	class newcls ;
-	getline(filename,newcls.ClassName) ;
+	ifstream classfile ("filename",ios::in) ; 
+	Class newcls ;
+	getline(classfile,newcls.ClassName) ;
 	cin >> newcls.Average;
 	cin >> newcls.Capacity;
 	string date ;
@@ -76,11 +76,11 @@ void AddClass(string filename)
 	for(size_t j=0 ; j<newcls.Capacity;j++)
 	{
 		Student newstd ;
-		classfile << newstd. Firstname ;
-		classfile << newstd. Lastname ;
-		classfile << newstd. ID ;	
-		classfile << newstd. Grade ;
-		classfile << date ;
+		classfile >> newstd. Firstname ;
+		classfile >> newstd. Lastname ;
+		classfile >> newstd. ID ;	
+		classfile >> newstd. Grade ;
+		classfile >> date ;
 
 		for ( auto i : date )
 		{
@@ -99,7 +99,7 @@ void AddClass(string filename)
 		newstd.Birthday.Year  =  stoi(temp[2]) ;
 		newcls.Data.push_back(newstd);
 	}	
-	Database.push_back(Newcls);
+	Database.push_back(newcls);
 }	
 //*********************************************************
 void RemoveClass(string nameclass)
@@ -113,15 +113,15 @@ void AddStudent(string flname, Date birthday, unsigned long long int id, float g
 //********************************************************* 
 void RemoveStudent(unsigned long long int id)
 {
-	for(class &i : Database)
+	for(Class i : Database)
 	{
-		if(i.ClassName==currentclass)
+		if(i.ClassName == currentclass)
 		{
 			for(size_t j=0 ; j< 10;j++)
 			{
 				if(i.Data.at(j).ID == id)
 				{
-					i.Data.erase(i.Data.begin()+j)
+					i.Data.erase(i.Data.begin()+j) ;
 				}
 			}
 		}
@@ -147,6 +147,6 @@ void Save();
 //********************************************************* 
 int main()
  {
-	Start(); 
+	Start()  ; 
 	return 0 ;
-} 
+ }
