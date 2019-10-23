@@ -31,11 +31,14 @@ struct Class
 
 vector <Class> Database;
 string currentclass ; 
+void Help()
+{
+}
 //******************************************************
 void SelectClass(string newclass)
 {
  	string currentclass = newclass ;
-	 cout << endl << currentclass ;
+	cout << endl << currentclass ;
 }
 //*********************************************************
 void AddClass(string filename)
@@ -166,10 +169,39 @@ void Search( string Name , string Familyname )
 //********************************************************* 
 void ShowClass(string nameclass)
 {
+	for (auto i : Database)
+	{
+		if (i.ClassName == currentclass )
+		{
+			for (size_t j = 0; j < i.Capacity; j++)
+			{
+				cout << i.Data.at(j).ID    ;
+				cout << i.Data.at(j).Grade ;
+				cout << i.Data.at(j).Birthday.Day ;
+				cout << "/" << i.Data.at(j).Birthday.Month ;
+				cout << "/" << i.Data.at(j).Birthday.Year  ;
+			}
+			
+		}
+		
+	}
 	
 }
 //********************************************************* 
-void ShowAll();
+void ShowAll()
+{
+	for (auto i : Database)
+	{
+		for (size_t j = 0; j < i.Capacity; j++)
+		{
+			cout << i.Data.at(j).ID    ;
+			cout << i.Data.at(j).Grade ;
+			cout << i.Data.at(j).Birthday.Day ;
+			cout << "/" << i.Data.at(j).Birthday.Month ;
+			cout << "/" << i.Data.at(j).Birthday.Year  ;
+		}
+	}
+}
 //********************************************************* 
 void SortByName();
 //********************************************************* 
@@ -181,7 +213,7 @@ void Start()
 {
 	vector <string> cmdline ;
 	string str ;
-	string temp ; 
+	string temp ;  
 	do{
 		getline(cin,str) ;
 		for( auto i : str )
@@ -216,53 +248,55 @@ void Start()
 				
 		if ( cmdline.at(1) == "add" && cmdline.at(2) == "class" )
 		{
-			
+			ddClass(string);
 		}
 
 		if ( cmdline.at(1) == "remove" &&  cmdline.at(2) == "class"  )
 		{
-			
+			RemoveClass(string);
 		}
 
 		
 		if ( cmdline.at(1)=="select" && cmdline.at(2)=="class" && cmdline.at(3)=="none")
 		{
-
+			SelectClass(string);
 		}
 		
 		if ( cmdline.at(1)=="remove" && cmdline.at(2)=="student" )
 		{
-
+			RemoveStudent(unsigned long long int);
 		}
 		
 		if ( cmdline.at(1)=="search" )
 		{
-
+			Search(unsigned long long int);
+			Search(string, string);
 		}
 		
 		if ( cmdline.at(1)=="show") 
 		{
-
+			ShowClass(string);
+			ShowAll();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="name" )
 		{
-
+			SortByName();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="id" )
 		{
-
+			SortByID();
 		}
 		
 		if ( cmdline.at(1)=="save" )
 		{
-
+			Save();
 		}
 		
 		if ( cmdline.at(1)=="help" )
 		{
-
+			Help();
 		}
 
 	} while ( cmdline.at(0) == "exit") ;
