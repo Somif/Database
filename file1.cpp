@@ -33,6 +33,20 @@ vector <Class> Database;
 string currentclass ; 
 void Help()
 {
+	cout << " _If you want " << endl ;
+	cout << "              add a classfile 	    	            Enter :       basu add class <File Name>" << endl         ;
+	cout << "              remove a class      	            Enter :       basu remove class <Class Name>" << endl         ;
+	cout << "              select a class    	            Enter :       basu select class <Class Name>" << endl         ;
+	cout << "              select none       	            Enter :       basu select none" << endl                  	  ;
+	cout << "              remove student   	   	            Enter :       basu remove student <ID>" << endl      	  ;
+	cout << "              search a student with ID	      	    Enter :       basu search <ID>" << endl            		  ;
+	cout << "              serach a student with Full Name       Enter :       basu serach <Full Name>" << endl           ;
+	cout << "              show        		            Enter :       basu basu show" << endl                      		  ;
+	cout << "              show a Class       	            Enter :       basu show <Class Name>" << endl              	  ;
+	cout << "              sort name               	            Enter :       basu select class <Class Name>" << endl     ;
+	cout << "              sort id                	            Enter :       basu sort id" << endl                  	  ;
+	cout << "              save                   	            Enter :       basu save" << endl                     	  ;
+	cout << "              exit                   	            Enter :       exit" << endl                          	  ;
 }
 //******************************************************
 void SelectClass(string newclass)
@@ -141,10 +155,10 @@ void Search(unsigned long long int id)
 			{
 				if (i.Data.at(j).ID == id)
 				{
-					cout << i.Data.at(j).Firstname ;
-					cout << i.Data.at(j).Lastname  ;
-					cout << i.Data.at(j).Grade ;
-					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year ;
+					cout << i.Data.at(j).Firstname << endl ;
+					cout << i.Data.at(j).Lastname  << endl ;
+					cout << i.Data.at(j).Grade << endl ;
+					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year  << endl ;
 				}
 			}
 	}
@@ -159,9 +173,9 @@ void Search( string Name , string Familyname )
 			{
 				if (i.Data.at(j).Firstname == Name && i.Data.at(j).Lastname == Familyname)
 				{
-					cout << i.Data.at(j).ID  ;
-					cout << i.Data.at(j).Grade ;
-					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year ;
+					cout << i.Data.at(j).ID  << endl ;
+					cout << i.Data.at(j).Grade  << endl;
+					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year  << endl ;
 				}
 			}
 	}
@@ -175,11 +189,11 @@ void ShowClass(string nameclass)
 		{
 			for (size_t j = 0; j < i.Capacity; j++)
 			{
-				cout << i.Data.at(j).ID    ;
-				cout << i.Data.at(j).Grade ;
-				cout << i.Data.at(j).Birthday.Day ;
-				cout << "/" << i.Data.at(j).Birthday.Month ;
-				cout << "/" << i.Data.at(j).Birthday.Year  ;
+				cout << i.Data.at(j).ID << endl    ;
+				cout << i.Data.at(j).Grade << endl ;
+				cout << i.Data.at(j).Birthday.Day << endl ;
+				cout << "/" << i.Data.at(j).Birthday.Month << endl ;
+				cout << "/" << i.Data.at(j).Birthday.Year << endl  ;
 			}
 			
 		}
@@ -192,13 +206,14 @@ void ShowAll()
 {
 	for (auto i : Database)
 	{
+		cout << i.ClassName << endl ;
 		for (size_t j = 0; j < i.Capacity; j++)
 		{
-			cout << i.Data.at(j).ID    ;
-			cout << i.Data.at(j).Grade ;
-			cout << i.Data.at(j).Birthday.Day ;
-			cout << "/" << i.Data.at(j).Birthday.Month ;
-			cout << "/" << i.Data.at(j).Birthday.Year  ;
+			cout << i.Data.at(j).ID  << endl   ;
+			cout << i.Data.at(j).Grade << endl ;
+			cout << i.Data.at(j).Birthday.Day << endl ;
+			cout << "/" << i.Data.at(j).Birthday.Month << endl ;
+			cout << "/" << i.Data.at(j).Birthday.Year << endl  ;
 		}
 	}
 }
@@ -215,6 +230,7 @@ void Start()
 	string str ;
 	string temp ;  
 	do{
+		cout << "Database >>" ;
 		getline(cin,str) ;
 		for( auto i : str )
 		{
@@ -241,57 +257,55 @@ void Start()
 		cout << cmdline.at(1) ;
 		if ( cmdline.at(1) == "select" && cmdline.at(2) == "class" )
 		{
-			cout<< 6666 ;
-			cout<< cmdline[t+=3] ;
-			SelectClass( cmdline.at(3));
+			SelectClass( cmdline.at(3) );
 		}
 				
 		if ( cmdline.at(1) == "add" && cmdline.at(2) == "class" )
 		{
-			ddClass(string);
+			AddClass( cmdline.at(3) );
 		}
 
 		if ( cmdline.at(1) == "remove" &&  cmdline.at(2) == "class"  )
 		{
-			RemoveClass(string);
+			RemoveClass( cmdline.at(3) );
 		}
 
 		
 		if ( cmdline.at(1)=="select" && cmdline.at(2)=="class" && cmdline.at(3)=="none")
 		{
-			SelectClass(string);
+			SelectClass( cmdline.at(3) );
 		}
 		
 		if ( cmdline.at(1)=="remove" && cmdline.at(2)=="student" )
 		{
-			RemoveStudent(unsigned long long int);
+			//RemoveStudent( cmdline.at(3) );
 		}
 		
 		if ( cmdline.at(1)=="search" )
 		{
-			Search(unsigned long long int);
-			Search(string, string);
+			//Search( cmdline.at(2));
+			//Search( cmdline.at(2),  cmdline.at(3));
 		}
 		
 		if ( cmdline.at(1)=="show") 
 		{
-			ShowClass(string);
-			ShowAll();
+			//ShowClass( cmdline.at(3));
+			//ShowAll();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="name" )
 		{
-			SortByName();
+			//SortByName();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="id" )
 		{
-			SortByID();
+			//SortByID();
 		}
 		
 		if ( cmdline.at(1)=="save" )
 		{
-			Save();
+			//Save();
 		}
 		
 		if ( cmdline.at(1)=="help" )
