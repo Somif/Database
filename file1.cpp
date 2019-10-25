@@ -33,20 +33,45 @@ vector <Class> Database;
 string currentclass ; 
 void Help()
 {
-	cout << " _If you want " << endl ;
-	cout << "              add a classfile 	    	            Enter :       basu add class <File Name>" << endl         ;
-	cout << "              remove a class      	            Enter :       basu remove class <Class Name>" << endl         ;
-	cout << "              select a class    	            Enter :       basu select class <Class Name>" << endl         ;
-	cout << "              select none       	            Enter :       basu select none" << endl                  	  ;
-	cout << "              remove student   	   	            Enter :       basu remove student <ID>" << endl      	  ;
-	cout << "              search a student with ID	      	    Enter :       basu search <ID>" << endl            		  ;
-	cout << "              serach a student with Full Name       Enter :       basu serach <Full Name>" << endl           ;
-	cout << "              show        		            Enter :       basu basu show" << endl                      		  ;
-	cout << "              show a Class       	            Enter :       basu show <Class Name>" << endl              	  ;
-	cout << "              sort name               	            Enter :       basu select class <Class Name>" << endl     ;
-	cout << "              sort id                	            Enter :       basu sort id" << endl                  	  ;
-	cout << "              save                   	            Enter :       basu save" << endl                     	  ;
-	cout << "              exit                   	            Enter :       exit" << endl                          	  ;
+	cout <<" _If you want " << endl ;
+	cout << right << setfill(' ') << setw(29) << "add a classfile"          ;
+    cout << right << setfill(' ') << setw(29) << "Enter :"<< setfill(' ') << setw(37)<< "basu add class <Class Name>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(28) << "remove a class"          ;
+    cout << right << setfill(' ') << setw(30) << "Enter :"<< setfill(' ') << setw(40)<< "basu remove class <Class Name>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(28) << "select a class"          ;
+    cout << right << setfill(' ') << setw(30) << "Enter :"<< setfill(' ') << setw(40)<< "basu select class <Class Name>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(25) << "select none"          ;
+    cout << right << setfill(' ') << setw(33) << "Enter :"<< setfill(' ') << setw(26)<< "basu select none"<< endl  ;
+
+    cout << right << setfill(' ') << setw(28) << "remove student"          ;
+    cout << right << setfill(' ') << setw(30) << "Enter :"<< setfill(' ') << setw(34)<< "basu remove student <ID>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(38) << "search a student with ID"          ;
+    cout << right << setfill(' ') << setw(20) << "Enter :"<< setfill(' ') << setw(26)<< "basu search <ID>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(45) << "serach a student with Full Name"          ;
+    cout << right << setfill(' ') << setw(13) << "Enter :"<< setfill(' ') << setw(33)<< "basu serach <Full Name>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(18) << "show"          ;
+    cout << right << setfill(' ') << setw(40) << "Enter :"<< setfill(' ') << setw(19)<< "basu show"<< endl  ;
+
+    cout << right << setfill(' ') << setw(26) << "show a class"          ;
+    cout << right << setfill(' ') << setw(32) << "Enter :"<< setfill(' ') << setw(32)<< "basu show <Class Name>"<< endl  ;
+
+    cout << right << setfill(' ') << setw(23) << " sort name"          ;
+    cout << right << setfill(' ') << setw(34) << "Enter :"<< setfill(' ') << setw(24)<< "basu sort name"<< endl  ;
+
+    cout << right << setfill(' ') << setw(21) << "sort id"          ;
+    cout << right << setfill(' ') << setw(36) << "Enter :"<< setfill(' ') << setw(23)<< "basu  sort id"<< endl  ;
+
+    cout << right << setfill(' ') << setw(18) << "save"          ;
+    cout << right << setfill(' ') << setw(38) << "Enter :"<< setfill(' ') << setw(19)<< "basu save"<< endl  ;
+
+    cout << right << setfill(' ') << setw(18) << "exit"          ;
+    cout << right << setfill(' ') << setw(40) << "Enter :"<< setfill(' ') << setw(14)<< "exit"<< endl  ;
 }
 //******************************************************
 void SelectClass(string newclass)
