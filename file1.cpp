@@ -31,11 +31,56 @@ struct Class
 
 vector <Class> Database;
 string currentclass ; 
+//******************************************************
+void AddClass(string filename)
+{
+	ifstream classfile (filename.c_str(),ios::in) ; 
+	Class newcls ;
+	
+	getline(classfile,newcls.ClassName) ;
+	classfile >> newcls.Capacity;
+	string date ;
+	
+	for( size_t j=0 ; j < newcls.Capacity ; j++)
+	{
+		cout << j << "    ";
+		Student newstd ;
+		classfile >> newstd. Firstname ;
+		cout <<newstd. Firstname <<"   ";
+		classfile >> newstd. Lastname ;
+		classfile >> date ;
+		string temp[3] ;
+		size_t count = 0 ;
+		for( auto i : date )
+		{
+			if( i != '/')
+			{
+				temp[count] += i ;
+			}else
+			{
+				count ++ ;
+			}
+		}
+		newstd.Birthday.Day   = stoi (temp[0] ) ;
+		cout << newstd.Birthday.Day <<" "  ;
+
+		newstd.Birthday.Month = stoi ( temp[1]) ;
+		cout <<newstd.Birthday.Month<<" " ;
+		newstd.Birthday.Year  = stoi ( temp[2] ); 
+		cout <<newstd.Birthday.Year<<endl ;
+		classfile >> newstd. Grade ;
+		classfile >> newstd. ID ;
+		newcls.Data.push_back(newstd);
+	}	
+	Database.push_back(newcls);
+	classfile.close() ;
+}
+//*********************************************************8888
 void Help()
 {
 	cout <<" _If you want " << endl ;
 	cout << right << setfill(' ') << setw(29) << "add a classfile"          ;
-    cout << right << setfill(' ') << setw(29) << "Enter :"<< setfill(' ') << setw(37)<< "basu add class <Class Name>"<< endl  ;
+    cout << right << setfill(' ') << setw(29) << "Enter :"<< setfill(' ') << setw(37)<< "basu add class <file Name>"<< endl  ;
 
     cout << right << setfill(' ') << setw(28) << "remove a class"          ;
     cout << right << setfill(' ') << setw(30) << "Enter :"<< setfill(' ') << setw(40)<< "basu remove class <Class Name>"<< endl  ;
@@ -77,46 +122,7 @@ void Help()
 void SelectClass(string newclass)
 {
  	string currentclass = newclass ;
-	cout << endl << currentclass ;
-}
-//*********************************************************
-void AddClass(string filename)
-{
-	ifstream classfile ("filename",ios::in) ; 
-	Class newcls ;
-	getline(classfile,newcls.ClassName) ;
-	cin >> newcls.Average;
-	cin >> newcls.Capacity;
-	string date ;
-	size_t count=0 ;
-	string temp[3] ;
-	for(size_t j=0 ; j<newcls.Capacity;j++)
-	{
-		Student newstd ;
-		classfile >> newstd. Firstname ;
-		classfile >> newstd. Lastname ;
-		classfile >> newstd. ID ;	
-		classfile >> newstd. Grade ;
-		classfile >> date ;
-
-		for ( auto i : date )
-		{
-			if  (i == '/' )
-				count ++ ;
-			else
-			{
-				temp[count] += i ;
-			}
-		}
-		cout << temp[0];
-		cout << temp[1];
-		cout << temp[2];
-		newstd.Birthday.Day   =  stoi(temp[0]) ;
-		newstd.Birthday.Month =  stoi(temp[1]) ;
-		newstd.Birthday.Year  =  stoi(temp[2]) ;
-		newcls.Data.push_back(newstd);
-	}	
-	Database.push_back(newcls);
+	cout << endl << currentclass<< "gggg" ;
 }	
 //*********************************************************
 void RemoveClass(string nameclass)
@@ -255,31 +261,30 @@ void Start()
 	string str ;
 	string temp ;  
 	do{
-		cout << "Database >>" ;
+		cout << "Database >> " ;
 		getline(cin,str) ;
 		for( auto i : str )
 		{
-			
 			if( i != ' ')
 			{
 				temp += i ;
 			}else
 			{
 				cmdline.push_back(temp) ;
-				cout << temp ;
 				temp = "" ;
 			
 			}
 		}
+		cmdline.push_back(temp) ;
+		temp = "" ;
 		size_t t=0 ;
-		/*for (auto i : cmdline)
+		for (auto i : cmdline)
 		{
 			cout << cmdline.at(t) ;
 			t++ ;
 		}
-		*/
+		
 		cout << endl ;
-		cout << cmdline.at(1) ;
 		if ( cmdline.at(1) == "select" && cmdline.at(2) == "class" )
 		{
 			SelectClass( cmdline.at(3) );
@@ -337,9 +342,14 @@ void Start()
 		{
 			Help();
 		}
-
-	} while ( cmdline.at(0) == "exit") ;
-	
+		if ( cmdline.at(0) == "exit")
+		{
+			cout << "bye" ;
+			break ;
+		}
+		cmdline.clear() ;
+	} while ( true) ;
+	cout << "bye" ;
 }
 //******************************************************
 int main()
