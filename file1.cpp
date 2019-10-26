@@ -166,17 +166,16 @@ void RemoveClass(string nameclass)
 	}
 }
 //********************************************************************************************
-void AddStudent(string flname, Date birthday, unsigned long long int id, float gray)
+void AddStudent(string fname,string lname ,string birthday, unsigned long long int id, float gray)
 {
-	Student newstudent ;
-	string date ;
+	Student newstudent ; 
 	string temp[3] ;
 	size_t count = 0 ;
-	newstudent.Firstname ;
-	newstudent.Lastname ;
-	newstudent.ID == id ;
-	newstudent.Grade == gray ;
-	for ( auto i : date )
+	newstudent.Firstname = fname ;
+	newstudent.Lastname  = lname ;
+	newstudent.ID = id ;
+	newstudent.Grade = gray ;
+	for ( auto i : birthday )
 	{
 		if  (i == '/' )
 			count ++ ;
@@ -188,13 +187,14 @@ void AddStudent(string flname, Date birthday, unsigned long long int id, float g
 	newstudent.Birthday.Day   =  stoi(temp[0]) ;
 	newstudent.Birthday.Month =  stoi(temp[1]) ;
 	newstudent.Birthday.Year  =  stoi(temp[2]) ;
-	//Data.push_back(newstudent) ;
-	cout<<"Do you want to save changes ? (yes/no)" ;
-	string savechanges ;
-	/*if (savechanges == "yes")
+	for (auto i : Database)
 	{
-		Save();
-	}*/
+		if (i.ClassName == ::currentclass)
+		{
+			i.Data.push_back(newstudent) ;
+		}
+		
+	}
 }
 //********************************************************************************************
 void RemoveStudent(unsigned long long int id)
@@ -203,7 +203,6 @@ void RemoveStudent(unsigned long long int id)
 	{
 		if(i.ClassName == ::currentclass)
 		{
-			cout << "dd" ;
 			for(size_t j=0 ; j< 10;j++)
 			{
 				if(i.Data.at(j).ID == id)
@@ -245,12 +244,13 @@ void Search( string Name , string Familyname )
 					cout << i.Data.at(j).ID  << "  " ;
 					cout << i.Data.at(j).Grade  << "  ";
 					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year  << endl ;
+					break ;
 				}
 			}
 	}
 }
 //********************************************************************************************
-void ShowClass(string nameclass)
+void ShowClass(string nameclass) 
 {
 	for (auto i : Database)
 	{
@@ -314,14 +314,12 @@ void ShowAll()
 //********************************************************************************************
 void SortByID()
 {
-	cout << "jon" ;
 	for (auto b : Database)
 	{
 		if (b.ClassName == ::currentclass )
 		{
-			cout << "jooon" ;
 			unsigned long long int temp ;
-			for (int i = b.Capacity ; i > 0 ; i--)
+			for (int i = (b.Capacity)-1 ; i > 0 ; i--)
 			{
 				for (int j = 0; j < i; j++)
 				{
@@ -430,20 +428,26 @@ void Start()
 		
 		if ( cmdline.at(1)=="remove" && cmdline.at(2)=="student" )
 		{
-		    RemoveStudent( stoi(cmdline.at(3)) );
+			cout<< stoull(cmdline.at(3)) + 2 <<endl ;
+		    RemoveStudent( stoull(cmdline.at(3)) );
 		}
 		
+		if ( cmdline.at(1)=="add" && cmdline.at(2)=="student" )
+		{
+		    AddStudent( cmdline.at(3),cmdline.at(4),cmdline.at(5) ,stoull(cmdline.at(6)),stof(cmdline.at(7)) );
+		}
+
 		if ( cmdline.at(1)=="search" )
 		{
 			cout<< cmdline.at(2)<<endl ;
 			if ( cmdline.size()== 3 )
 			{
 				cout << "size ==3" << endl ;
-				Search( stoi ( cmdline.at(2) ) );
+				Search( stoull ( cmdline.at(2) ) );
 			}
 			if (cmdline.size() == 4)
 			{
-				Search( cmdline.at(2),  cmdline.at(3));
+				Search( cmdline.at(2),cmdline.at(3) );
 			}
 		}
 		
