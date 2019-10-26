@@ -74,7 +74,7 @@ void AddClass(string filename)
 	Database.push_back(newcls);
 	classfile.close() ;
 }
-//*********************************************************8888
+//********************************************************************************************
 void Help()
 {
 	cout <<" _If you want " << endl ;
@@ -117,14 +117,14 @@ void Help()
     cout << right << setfill(' ') << setw(18) << "exit"          ;
     cout << right << setfill(' ') << setw(40) << "Enter :"<< setfill(' ') << setw(14)<< "exit"<< endl  ;
 }
-//******************************************************
+//********************************************************************************************
 string currentclass ;
 void SelectClass(string nclass)
 {
  	currentclass = nclass ;
-	cout <<currentclass << "      vared shod 2 "<<endl ;
+	cout <<currentclass << "  vared shod 2 "<<endl ;
 }	
-
+//********************************************************************************************
 void SortByName()
 {
 	for (auto b : Database)
@@ -139,7 +139,6 @@ void SortByName()
 				{
 					if ( b.Data.at(j).Firstname > b.Data.at(j+1).Firstname )
 					{
-						cout << currentclass <<"   " ;
 						temp = b.Data.at(j).Firstname ;
 						b.Data.at(j).Firstname = b.Data.at(j+1).Firstname ;
 						b.Data.at(j+1).Firstname = temp ;
@@ -153,20 +152,20 @@ void SortByName()
 		}	
 	}	
 }
-
+//********************************************************************************************
 void RemoveClass(string nameclass)
 {
 	for(Class i : Database)
 	{
 		int j =0 ;
-		if(i.ClassName == currentclass)
+		if(i.ClassName == nameclass)
 		{
 			Database.erase(Database.begin()+j) ;
 			cout << "dd" << endl ;
 		}
 	}
 }
-//********************************************************* 
+//********************************************************************************************
 void AddStudent(string flname, Date birthday, unsigned long long int id, float gray)
 {
 	Student newstudent ;
@@ -197,12 +196,12 @@ void AddStudent(string flname, Date birthday, unsigned long long int id, float g
 		Save();
 	}*/
 }
-//********************************************************* 
+//********************************************************************************************
 void RemoveStudent(unsigned long long int id)
 {
 	for(Class i : Database)
 	{
-		if(i.ClassName == currentclass)
+		if(i.ClassName == ::currentclass)
 		{
 			cout << "dd" ;
 			for(size_t j=0 ; j< 10;j++)
@@ -216,7 +215,7 @@ void RemoveStudent(unsigned long long int id)
 		}
 	}
 }
-//********************************************************* 
+//********************************************************************************************
 void Search(unsigned long long int id) 
 {
 	for (auto i : Database)
@@ -234,7 +233,7 @@ void Search(unsigned long long int id)
 	}
 	
 }
-//********************************************************* 
+//********************************************************************************************
 void Search( string Name , string Familyname )
 {
 	for (auto i : Database)
@@ -250,12 +249,12 @@ void Search( string Name , string Familyname )
 			}
 	}
 }
-//********************************************************* 
+//********************************************************************************************
 void ShowClass(string nameclass)
 {
 	for (auto i : Database)
 	{
-		if (i.ClassName == currentclass )
+		if (i.ClassName == nameclass )
 		{
 			for (size_t j = 0; j < i.Capacity; j++)
 			{
@@ -271,9 +270,30 @@ void ShowClass(string nameclass)
 		}
 		
 	}
-	
 }
-//********************************************************* 
+//******************************************************************************************** 
+void ShowClass ()
+{
+	for (auto i : Database)
+	{
+		if (i.ClassName == ::currentclass )
+		{
+			for (size_t j = 0; j < i.Capacity; j++)
+			{
+				cout << i.Data.at(j).Firstname << "  " ;
+				cout << i.Data.at(j).Lastname << "  " ;
+				cout << i.Data.at(j).ID << "  " ;
+				cout << i.Data.at(j).Grade << "  " ;
+				cout << i.Data.at(j).Birthday.Day ;
+				cout << "/" << i.Data.at(j).Birthday.Month ;
+				cout << "/" << i.Data.at(j).Birthday.Year << endl  ;
+			}
+			
+		}
+		
+	}
+}
+//******************************************************************************************** 
 void ShowAll()
 {
 	for (auto i : Database)
@@ -291,20 +311,17 @@ void ShowAll()
 		}
 	}
 }
-//********************************************************* 
-
-//********************************************************* 
+//********************************************************************************************
 void SortByID()
 {
-	cout << currentclass<<"    ss"<< endl ;
-	cout << Database.at(0).ClassName << endl ;
+	cout << "jon" ;
 	for (auto b : Database)
 	{
-		cout << currentclass<<"    ss"<< endl ;
-		if (b.ClassName == currentclass )
+		if (b.ClassName == ::currentclass )
 		{
+			cout << "jooon" ;
 			unsigned long long int temp ;
-			for (int i = 4 ; i > 0 ; i--)
+			for (int i = b.Capacity ; i > 0 ; i--)
 			{
 				for (int j = 0; j < i; j++)
 				{
@@ -319,14 +336,14 @@ void SortByID()
 			}
 			for (auto i : b.Data)
 			{
-				cout << i.ID << endl ;
+				cout << i.ID <<"   " ;
 			}
 		}
 		
 	}
 	
 }
-//********************************************************* 
+//********************************************************************************************
 void Save()
 {
 	char savechanges ;
@@ -358,14 +375,14 @@ if (savechanges=='o' || savechanges=='O')
 }
 	
 }
-//********************************************************* 
+//******************************************************************************************** 
 void Start()
 {
 	vector <string> cmdline ;
 	string str ;
 	string temp ;  
 	do{
-		cout << "Database >> " ;
+		cout << endl << "Database >> " ;
 		getline(cin,str) ;
 		for( auto i : str )
 		{
@@ -418,19 +435,39 @@ void Start()
 		
 		if ( cmdline.at(1)=="search" )
 		{
-			Search( stoi ( cmdline.at(2) ) );
-			Search( cmdline.at(2),  cmdline.at(3));
+			cout<< cmdline.at(2)<<endl ;
+			if ( cmdline.size()== 3 )
+			{
+				cout << "size ==3" << endl ;
+				Search( stoi ( cmdline.at(2) ) );
+			}
+			if (cmdline.size() == 4)
+			{
+				Search( cmdline.at(2),  cmdline.at(3));
+			}
 		}
 		
 		if ( cmdline.at(1)=="show") 
 		{
-			ShowClass( cmdline.at(3));
-			ShowAll();
+			if (cmdline.size() == 3)
+			{
+				if ( cmdline.at(2) == "all")
+				{
+					ShowAll() ;
+				}
+				if (cmdline.at(2) == "class")
+				{
+					ShowClass();
+				}
+			}
+			if (cmdline.size() == 4)
+			{
+				ShowClass( cmdline.at(3)) ;
+			}
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="name" )
 		{
-			cout << "vared shod  " ;
 			SortByName();
 		}
 		
