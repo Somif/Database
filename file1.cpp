@@ -30,7 +30,7 @@ struct Class
 };
 
 vector <Class> Database;
-string currentclass ; 
+ 
 //******************************************************
 void AddClass(string filename)
 {
@@ -62,12 +62,11 @@ void AddClass(string filename)
 			}
 		}
 		newstd.Birthday.Day   = stoi (temp[0] ) ;
-		cout << newstd.Birthday.Day <<" "  ;
-
+		//cout << newstd.Birthday.Day <<" "  ;
 		newstd.Birthday.Month = stoi ( temp[1]) ;
-		cout <<newstd.Birthday.Month<<" " ;
+		//cout <<newstd.Birthday.Month<<" " ;
 		newstd.Birthday.Year  = stoi ( temp[2] ); 
-		cout <<newstd.Birthday.Year<<endl ;
+		//cout <<newstd.Birthday.Year<<endl ;
 		classfile >> newstd. Grade ;
 		classfile >> newstd. ID ;
 		newcls.Data.push_back(newstd);
@@ -119,19 +118,51 @@ void Help()
     cout << right << setfill(' ') << setw(40) << "Enter :"<< setfill(' ') << setw(14)<< "exit"<< endl  ;
 }
 //******************************************************
-void SelectClass(string newclass)
+string currentclass ;
+void SelectClass(string nclass)
 {
- 	string currentclass = newclass ;
-	cout << endl << currentclass<< "gggg" ;
+ 	currentclass = nclass ;
+	cout <<currentclass << "      vared shod 2 "<<endl ;
 }	
-//*********************************************************
+
+void SortByName()
+{
+	for (auto b : Database)
+	{
+		if (b.ClassName == ::currentclass )
+		{
+			int count = b.Capacity ;
+			string temp ;
+			for (size_t i = count-1 ; i > 0 ; i--)
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if ( b.Data.at(j).Firstname > b.Data.at(j+1).Firstname )
+					{
+						cout << currentclass <<"   " ;
+						temp = b.Data.at(j).Firstname ;
+						b.Data.at(j).Firstname = b.Data.at(j+1).Firstname ;
+						b.Data.at(j+1).Firstname = temp ;
+					}
+				}	
+			}
+			for (auto i : b.Data)
+			{
+				cout << i.Firstname << endl ;
+			}
+		}	
+	}	
+}
+
 void RemoveClass(string nameclass)
 {
 	for(Class i : Database)
 	{
+		int j =0 ;
 		if(i.ClassName == currentclass)
 		{
-			
+			Database.erase(Database.begin()+j) ;
+			cout << "dd" << endl ;
 		}
 	}
 }
@@ -159,6 +190,12 @@ void AddStudent(string flname, Date birthday, unsigned long long int id, float g
 	newstudent.Birthday.Month =  stoi(temp[1]) ;
 	newstudent.Birthday.Year  =  stoi(temp[2]) ;
 	//Data.push_back(newstudent) ;
+	cout<<"Do you want to save changes ? (yes/no)" ;
+	string savechanges ;
+	/*if (savechanges == "yes")
+	{
+		Save();
+	}*/
 }
 //********************************************************* 
 void RemoveStudent(unsigned long long int id)
@@ -167,11 +204,13 @@ void RemoveStudent(unsigned long long int id)
 	{
 		if(i.ClassName == currentclass)
 		{
+			cout << "dd" ;
 			for(size_t j=0 ; j< 10;j++)
 			{
 				if(i.Data.at(j).ID == id)
 				{
 					i.Data.erase(i.Data.begin()+j) ;
+					i.Capacity -- ;
 				}
 			}
 		}
@@ -186,9 +225,9 @@ void Search(unsigned long long int id)
 			{
 				if (i.Data.at(j).ID == id)
 				{
-					cout << i.Data.at(j).Firstname << endl ;
-					cout << i.Data.at(j).Lastname  << endl ;
-					cout << i.Data.at(j).Grade << endl ;
+					cout << i.Data.at(j).Firstname <<"  " ;
+					cout << i.Data.at(j).Lastname  << "  " ;
+					cout << i.Data.at(j).Grade << "  " ;
 					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year  << endl ;
 				}
 			}
@@ -204,8 +243,8 @@ void Search( string Name , string Familyname )
 			{
 				if (i.Data.at(j).Firstname == Name && i.Data.at(j).Lastname == Familyname)
 				{
-					cout << i.Data.at(j).ID  << endl ;
-					cout << i.Data.at(j).Grade  << endl;
+					cout << i.Data.at(j).ID  << "  " ;
+					cout << i.Data.at(j).Grade  << "  ";
 					cout << i.Data.at(j).Birthday.Day << "/" << i.Data.at(j).Birthday.Month << "/" << i.Data.at(j).Birthday.Year  << endl ;
 				}
 			}
@@ -220,10 +259,12 @@ void ShowClass(string nameclass)
 		{
 			for (size_t j = 0; j < i.Capacity; j++)
 			{
-				cout << i.Data.at(j).ID << endl    ;
-				cout << i.Data.at(j).Grade << endl ;
-				cout << i.Data.at(j).Birthday.Day << endl ;
-				cout << "/" << i.Data.at(j).Birthday.Month << endl ;
+				cout << i.Data.at(j).Firstname << "  " ;
+				cout << i.Data.at(j).Lastname << "  " ;
+				cout << i.Data.at(j).ID << "  " ;
+				cout << i.Data.at(j).Grade << "  " ;
+				cout << i.Data.at(j).Birthday.Day ;
+				cout << "/" << i.Data.at(j).Birthday.Month ;
 				cout << "/" << i.Data.at(j).Birthday.Year << endl  ;
 			}
 			
@@ -240,20 +281,83 @@ void ShowAll()
 		cout << i.ClassName << endl ;
 		for (size_t j = 0; j < i.Capacity; j++)
 		{
-			cout << i.Data.at(j).ID  << endl   ;
-			cout << i.Data.at(j).Grade << endl ;
-			cout << i.Data.at(j).Birthday.Day << endl ;
-			cout << "/" << i.Data.at(j).Birthday.Month << endl ;
+			cout << i.Data.at(j).Firstname  << "  " ;
+			cout << i.Data.at(j).Lastname << "  " ;
+			cout << i.Data.at(j).ID  << "  "   ;
+			cout << i.Data.at(j).Grade <<"  ";
+			cout << i.Data.at(j).Birthday.Day ;
+			cout << "/" << i.Data.at(j).Birthday.Month ;
 			cout << "/" << i.Data.at(j).Birthday.Year << endl  ;
 		}
 	}
 }
 //********************************************************* 
-void SortByName();
+
 //********************************************************* 
-void SortByID();
+void SortByID()
+{
+	cout << currentclass<<"    ss"<< endl ;
+	cout << Database.at(0).ClassName << endl ;
+	for (auto b : Database)
+	{
+		cout << currentclass<<"    ss"<< endl ;
+		if (b.ClassName == currentclass )
+		{
+			unsigned long long int temp ;
+			for (int i = 4 ; i > 0 ; i--)
+			{
+				for (int j = 0; j < i; j++)
+				{
+					if ( b.Data.at(j).ID > b.Data.at(j+1).ID )
+					{
+						temp = b.Data.at(j).ID ;
+						b.Data.at(j).ID = b.Data.at(j+1).ID ;
+						b.Data.at(j+1).ID = temp ;
+					}
+				}
+				
+			}
+			for (auto i : b.Data)
+			{
+				cout << i.ID << endl ;
+			}
+		}
+		
+	}
+	
+}
 //********************************************************* 
-void Save();
+void Save()
+{
+	char savechanges ;
+	cout<<"where you want to save changes : "<< endl ;
+	cout << right << setfill(' ') << setw(54) << "Print  N : if you want to save changes on new file ." ; 
+	cout << right << setfill(' ') << setw(30) << "Print  O : if you want to save changes on old file ." ;
+	cin >> savechanges ;
+	if (savechanges=='n' || savechanges=='N')
+	{
+		string name ;
+		cin >> name ;
+		fstream newfile (name+".basu" , ios::out ) ;
+		if (newfile.fail())
+		{
+			cerr << "failed" ;
+			return  ;
+		}
+		for (auto i : Database)
+		{
+			
+		}
+		 
+
+		
+}
+if (savechanges=='o' || savechanges=='O')
+{
+	//ofstream oldfile ( ,ios::out,ios::app);
+}
+	
+}
 //********************************************************* 
 void Start()
 {
@@ -277,16 +381,17 @@ void Start()
 		}
 		cmdline.push_back(temp) ;
 		temp = "" ;
-		size_t t=0 ;
+	/*  size_t t=0 ;
 		for (auto i : cmdline)
 		{
 			cout << cmdline.at(t) ;
 			t++ ;
 		}
-		
+	*/
 		cout << endl ;
 		if ( cmdline.at(1) == "select" && cmdline.at(2) == "class" )
 		{
+			cout << "start/" << cmdline.at(3) <<endl ;
 			SelectClass( cmdline.at(3) );
 		}
 				
@@ -308,29 +413,30 @@ void Start()
 		
 		if ( cmdline.at(1)=="remove" && cmdline.at(2)=="student" )
 		{
-			//RemoveStudent( cmdline.at(3) );
+		    RemoveStudent( stoi(cmdline.at(3)) );
 		}
 		
 		if ( cmdline.at(1)=="search" )
 		{
-			//Search( cmdline.at(2));
-			//Search( cmdline.at(2),  cmdline.at(3));
+			Search( stoi ( cmdline.at(2) ) );
+			Search( cmdline.at(2),  cmdline.at(3));
 		}
 		
 		if ( cmdline.at(1)=="show") 
 		{
-			//ShowClass( cmdline.at(3));
-			//ShowAll();
+			ShowClass( cmdline.at(3));
+			ShowAll();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="name" )
 		{
-			//SortByName();
+			cout << "vared shod  " ;
+			SortByName();
 		}
 		
 		if ( cmdline.at(1)=="sort" && cmdline.at(2)=="id" )
 		{
-			//SortByID();
+			SortByID();
 		}
 		
 		if ( cmdline.at(1)=="save" )
