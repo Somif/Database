@@ -426,6 +426,14 @@ void Start()
 	do{
 		cout << endl << "Database >> " ;
 		getline(cin,str) ;
+		for (auto &i : str)
+		{
+			if ( i >= 'A' && i<= 'Z')
+			{
+				i +=32 ;
+			}
+			
+		}
 		for( auto i : str )
 		{
 			if( i != ' ')
